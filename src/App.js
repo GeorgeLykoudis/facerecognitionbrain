@@ -91,7 +91,7 @@ class App extends Component {
   }
 
   displayFaceBox = (box) => {
-    this.setState({ box : box});
+    this.setState({ box : box });
   }
 
   onButtonSubmit = () => {
@@ -113,7 +113,7 @@ class App extends Component {
   }
 
   render() {
-    const { isSignedIn, imageUrl, route, box } = this.state;
+    const { isSignedIn, imageUrl, route, box, user } = this.state;
     return (
       <div className="App">
         <ParticlesBg type="cobweb" bg={true} />
@@ -123,7 +123,7 @@ class App extends Component {
           ? 
           <div>
             <Logo />
-            <Rank />
+            <Rank name={user.name} entries={user.entries} />
             <ImageLinkForm 
               onInputChange={ this.onInputChange } 
               onButtonSubmit= { this.onButtonSubmit }/>
@@ -131,7 +131,7 @@ class App extends Component {
           </div>
           : (
             route === 'signin'
-            ? <Signin onRouteChange={this.onRouteChange}/> 
+            ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> 
             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
           )
         }
